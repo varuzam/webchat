@@ -1,0 +1,5 @@
+DEBUG = False
+SECRET_KEY = 'very secret string'
+
+SQLALCHEMY_DATABASE_URI = 'sqlite:///chat.db'
+SQLALCHEMY_TRACK_MODIFICATIONS = False

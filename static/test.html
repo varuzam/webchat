@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chat</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+/*$(document).ready(function() {
+	var socket = io.connect('http://127.0.0.1:5000');
+	socket.on('connect', function() {
+		socket.send('User has connected!');
+	});
+	socket.on('message', function(msg) {
+        $('#messages').append('<li>'+msg+'</li>');
+        console.log('Received message');
+    });
+    $('#sendbutton').on('click', function() {
+        socket.send($('#message').val());
+        $('#message').val('');
+    });
+});*/
+</script>
+
+<div>
+    <a href="/">Home</a>
+    <a href="/logout">Logout</a>
+</div>
+
+<ul id="messages">
+{% for message in messages %}
+    <li><script type="text/javascript"></script> {{ message }}</li>
+{% endfor %}
+</ul>
+
+<p><input id=message type=text name=message>
+<p><input id=sendbutton type=submit value=Send>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h3>Hello, {{ username }}. Choose chat room</h3>
+  <ul id="chats" class="list-group">
+    {% for room in chats %}
+      <li class="list-group-item">
+        <a href="/chat/{{ room.id }}">{{ room.name }}</a>
+        <span>{{ room.desc}}</span>
+        <span><i>created by</i> <b>{{ room.user.username }}</b></span>
+        <span class="float-right "><a class="text-danger" href="/chat/delete/{{ room.id }}">Delete</a></span>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% block head %}
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="{{ url_for('static', filename='base.js') }}"></script>
+  {% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 40px">
+  {% block navbar %}
+    <span class="navbar-brand">Navbar</span>
+    <div class="collapse navbar-collapse" id="navBar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" data-toggle=modal href="#ModalCreateChat">CreateChat</a></li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  {% endblock %}
+</nav>
+
+<div class="container" style="padding-top: 10px">
+  {% with alerts = get_flashed_messages(with_categories=true) %}
+    {% if alerts %}
+      {% for category, alert in alerts %}
+        <div class="alert alert-{{ category }}" role="alert">{{ alert }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <div class="modal bd-example-modal-sm" id="ModalCreateChat" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form role="form" action="/chat/create" method="post">
+            <div class="form-group">
+              <input type=text class="form-control" name=name placeholder="Chat name">
+            </div>
+            <div class="form-group">
+              <input type=text class="form-control" name=desc placeholder="Description">
+            </div>
+            <button type=submit class="btn btn-primary">Create</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

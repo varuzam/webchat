@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head %}
+  {{ super() }}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
+  <script src="{{ url_for('static', filename='chat.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+  <div class="col-lg-10"> <!-- chat window -->
+    <div>
+      <ul id="messages" class="list-group list-group-flush">
+        {% for message in msg_history %}
+          <li class="list-group-item"><i>(<script>document.write(time({{ message.time }}));</script>)</i><b>{{message.user}}</b>: {{message.msg}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="input-group">
+      <input id=msgInput type=text class="form-control" placeholder="text...">
+      <span class="input-group-btn">
+         <button id=sendMsgBtn class="btn btn-secondary" type="button">Send</button>
+      </span>
+    </div>
+  </div>
+  <div class="col-lg-2">
+    <div id="chatlist" class="list-group">
+      {% for room in chats %}
+        <a class="list-group-item list-group-item-action" room_id="{{ room.id }}" href="/chat/{{ room.id }}">{{ room.name }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+{% endblock %}
+

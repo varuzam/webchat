@@ -1,2 +1,2 @@
 # webchat
-WebChat for learning Flask etc. 
+It is for learning Flask and etc. 
